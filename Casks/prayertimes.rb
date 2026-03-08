@@ -23,8 +23,12 @@ cask "prayertimes" do
                    sudo: false
   end
 
-  uninstall quit: "com.abd3lraouf.PrayerTimes"
+  uninstall quit:       "com.abd3lraouf.PrayerTimes",
+            login_item: "PrayerTimes"
 
-  zap trash: "~/Library/Preferences/com.abd3lraouf.PrayerTimes.plist"
+  zap trash: [
+    "~/Library/Containers/com.abd3lraouf.PrayerTimes",
+    "~/Library/Preferences/com.abd3lraouf.PrayerTimes.plist",
+  ]
 end
 
