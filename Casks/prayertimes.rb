@@ -14,6 +14,12 @@ cask "prayertimes" do
 
   app "PrayerTimes.app"
 
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-r", "-d", "com.apple.quarantine", "#{appdir}/PrayerTimes.app"],
+                   sudo: false
+  end
+
   uninstall quit: "com.abd3lraouf.PrayerTimes"
 
   zap trash: "~/Library/Preferences/com.abd3lraouf.PrayerTimes.plist"
