@@ -23,14 +23,17 @@ cask "prayertimes" do
                    sudo: false
   end
 
+  uninstall_preflight do
+    # Reset all permissions (location, notifications, etc.) while app is still registered
+    system_command "/usr/bin/tccutil",
+                   args: ["reset", "All", "com.abd3lraouf.PrayerTimes"],
+                   sudo: false
+  end
+
   uninstall quit:       "com.abd3lraouf.PrayerTimes",
             login_item: "PrayerTimes"
 
   uninstall_postflight do
-    # Reset all permissions (location, notifications, etc.) so macOS re-prompts on next install
-    system_command "/usr/bin/tccutil",
-                   args: ["reset", "All", "com.abd3lraouf.PrayerTimes"],
-                   sudo: false
     # Flush cfprefsd cached preferences domain
     system_command "/usr/bin/defaults",
                    args: ["delete", "com.abd3lraouf.PrayerTimes"],
